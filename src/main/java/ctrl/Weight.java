@@ -4,7 +4,9 @@ public enum Weight {
 
 	ONEFOLD(1),
 	TWOFOLD(2),
-	THREEFOLD(3);
+	THREEFOLD(3),
+	BA_THESIS(20);
+	
 	
 	private final int value;
 	

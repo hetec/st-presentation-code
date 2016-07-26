@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,13 @@ import org.springframework.web.bind.annotation.RestController;
 		value="/api/v1",
 		produces=MediaType.APPLICATION_JSON_VALUE)
 public class SubjectCtrl {
+	
+	private GradeCalculator calculator;
+	
+	@Autowired
+	public SubjectCtrl(GradeCalculator calculator) {
+		this.calculator = calculator;
+	}
 	
 	private static Map<Long, Subject> subjects = new HashMap<>();
 	
@@ -50,10 +58,27 @@ public class SubjectCtrl {
 	}
 	
 	static {
-		Subject s1 = new Subject("Serverseritge Technologien", ONEFOLD , ONE_SEVEN);
+		Subject s1 = new Subject("Serverseritge Technologien", THREEFOLD , ONE_SEVEN);
 		subjects.put(s1.getId(), s1);
-		Subject s2 = new Subject("Audio- und Videoverarbeitung", Weight.TWOFOLD , THREE_THREE);
+		Subject s2 = new Subject("Audio- und Videoverarbeitung", THREEFOLD , THREE_THREE);
 		subjects.put(s2.getId(), s2);
+		Subject s3 = new Subject("Rechnerprogrammierung und WebTechnologien", THREEFOLD , ONE);
+		subjects.put(s3.getId(), s3);
+		Subject s4 = new Subject("Volks- und Betriebswirtschaftslehre"
+				+ " und wissenschaftliches Arbeiten", TWOFOLD , TWO_SEVEN);
+		subjects.put(s4.getId(), s4);
+		Subject s5 = new Subject("Betriebssysteme", THREEFOLD , FOUR);
+		subjects.put(s5.getId(), s5);
+		Subject s6 = new Subject("Investitionen, Finanzierung "
+				+ "und Unternehmensführung", TWOFOLD , THREE_THREE);
+		subjects.put(s6.getId(), s6);
+		Subject s7 = new Subject("Digitaltechnik und Rechnerarchitektur", THREEFOLD , TWO_THREE);
+		subjects.put(s7.getId(), s7);
+		Subject s8 = new Subject("Fachenglisch und "
+				+ "Kommunikationstechniken", TWOFOLD , THREE_THREE);
+		subjects.put(s8.getId(), s8);
+		Subject s9 = new Subject("Bachelorarbeit", BA_THESIS , TWO_THREE);
+		subjects.put(s9.getId(), s9);
 		
 	}
 
@@ -92,6 +117,12 @@ public class SubjectCtrl {
 		}else{
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
+	}
+	
+	@RequestMapping(value="/subjects/averageResult", method=RequestMethod.POST)
+	public ResponseEntity<Result> caclulateAverageResult(){
+		Result result = calculator.calculateAverageResult(subjects.values());
+		return new ResponseEntity<Result>(result, HttpStatus.CREATED);
 	}
 }
 

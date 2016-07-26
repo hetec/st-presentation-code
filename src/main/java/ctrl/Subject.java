@@ -11,9 +11,9 @@ public class Subject {
 	
 	private String name;
 	
-	private Weight weight;
+	private int weight;
 	
-	private Grade grade;
+	private double grade;
 
 	public Subject(){}
 	
@@ -27,8 +27,8 @@ public class Subject {
 	public Subject(String name, Weight weight, Grade grade) {
 		this.id = COUNTER.incrementAndGet();
 		this.name = name;
-		this.weight = weight;
-		this.grade = grade;
+		this.weight = weight.getValue();
+		this.grade = grade.getValue();
 	}
 
 	public Long getId() {
@@ -47,20 +47,20 @@ public class Subject {
 		this.name = name;
 	}
 
-	public Weight getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 
 	public void setWeight(Weight weight) {
-		this.weight = weight;
+		this.weight = weight.getValue();
 	}
 
-	public Grade getGrade() {
+	public double getGrade() {
 		return grade;
 	}
 
 	public void setGrade(Grade grade) {
-		this.grade = grade;
+		this.grade = grade.getValue();
 	}
 	
 }
