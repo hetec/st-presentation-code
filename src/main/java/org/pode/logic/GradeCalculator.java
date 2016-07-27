@@ -1,9 +1,11 @@
-package ctrl;
+package org.pode.logic;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.pode.model.Result;
+import org.pode.model.Subject;
 import org.springframework.stereotype.Component;
 
 @Component

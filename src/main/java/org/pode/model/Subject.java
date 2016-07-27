@@ -1,8 +1,10 @@
-package ctrl;
+package org.pode.model;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Subject {
 	
 	private static AtomicLong COUNTER = new AtomicLong(0);

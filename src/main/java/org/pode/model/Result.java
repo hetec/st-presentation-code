@@ -1,4 +1,4 @@
-package ctrl;
+package org.pode.model;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,10 +11,10 @@ public class Result {
 	
 	private double finalGrade;
 
-	public Result(Collection<String> consideredSubjects, int ofHundered, double finalGrade) {
+	public Result(Collection<String> consideredSubjects, int ofHundred, double finalGrade) {
 		super();
 		this.consideredSubjects = consideredSubjects;
-		this.ofHundered = ofHundered;
+		this.ofHundered = ofHundred;
 		this.finalGrade = finalGrade;
 	}
 

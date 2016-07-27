@@ -1,4 +1,4 @@
-package ctrl;
+package org.pode.model;
 
 public enum Grade {
 	ONE(1.0),
