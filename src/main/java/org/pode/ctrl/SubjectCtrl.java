@@ -13,6 +13,7 @@ import org.pode.logic.GradeCalculator;
 import org.pode.model.Result;
 import org.pode.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UriTemplate;
 
 @RestController
 @RequestMapping(
@@ -59,7 +63,13 @@ public class SubjectCtrl {
 	@RequestMapping(value="/subjects", method=RequestMethod.POST)
 	public ResponseEntity<Subject> addSubject(@RequestBody Subject subject){
 		subject = add(subject);
-		return new ResponseEntity<Subject>(subject, HttpStatus.CREATED);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(subject.getId())
+				.toUri());
+		return new ResponseEntity<Subject>(subject, headers, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/subjects/{id}", method=RequestMethod.PUT)
